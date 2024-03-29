@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -19,9 +20,9 @@ class LoginController extends Controller
         if ($validator->fails())
             return response()->json($validator->errors(), 400);
 
-        $user = $request->user();
+        $user = User::where('email', $request->email)->first();
 
-        if(!empty($user->email)){
+        if($user){
             if(empty($user->password) && $user->provider !== 'credentials')
                 return response()->json("please login using google account", 401);
 

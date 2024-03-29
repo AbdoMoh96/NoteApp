@@ -29,10 +29,8 @@ class SocialiteController extends Controller
             ],
             [
                 'name' => $providerUser->getName(),
-            ],
-            [
-                'provider' => $request->provider
-            ],
+                'provider' => $provider
+            ]
         );
         $data =  [
             'token' => $user->createToken("access_token_{$request->provider}")->plainTextToken,
