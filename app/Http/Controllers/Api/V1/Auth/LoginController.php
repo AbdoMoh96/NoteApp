@@ -24,7 +24,7 @@ class LoginController extends Controller
 
         if($user){
             if(empty($user->password) && $user->provider !== 'credentials')
-                return response()->json("please login using google account", 401);
+                return response()->json("please login using {$user->provider} account", 401);
 
             if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
                 $data =  [
