@@ -17,3 +17,13 @@ use Illuminate\Support\Facades\Artisan;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
+
+Artisan::command('ide:help', function () {
+    Artisan::call('ide-helper:generate');
+    Artisan::call('ide-helper:meta');
+})->purpose('generate facade and model documentation for ide');
+
+
+Artisan::command('model:help', function () {
+    Artisan::call('ide-helper:models', ['--write' => 'yes']);
+})->purpose('generate facade and model documentation for ide');
