@@ -4,9 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $title
@@ -30,9 +31,15 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Note extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'notes';
+
+    protected $fillable = [
+        'title',
+        'body',
+        'user_id'
+    ];
 
     public function user(){
         return $this->belongsTo(User::class, 'user_id', 'id');
