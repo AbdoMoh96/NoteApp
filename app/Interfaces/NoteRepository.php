@@ -4,9 +4,9 @@ namespace App\Interfaces;
 
 interface NoteRepository
 {
-    public function getAllNotes();
+    public function getAllUserNotes();
 
-    public function filterNoteByName($name);
+    public function filterNoteByTitle($title);
 
     public function storeNote($data);
 

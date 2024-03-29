@@ -1,34 +1,45 @@
 <?php
 
 namespace App\Repositories;
-
+use App\Models\Note;
 use App\Interfaces\NoteRepository;
+use Illuminate\Support\Facades\Auth;
 
 class NoteRepositoryImp implements NoteRepository
 {
 
-    public function getAllNotes()
+    public function getAllUserNotes()
     {
-        // TODO: Implement getAllNotes() method.
+        return Auth::user()->notes()->get();
     }
 
-    public function filterNoteByName($name)
+    public function filterNoteByTitle($title)
     {
-        // TODO: Implement filterNoteByName() method.
+        return Note::where('title', 'like', "%{$title}%")->get();
     }
 
     public function storeNote($data)
     {
-        // TODO: Implement storeNote() method.
+        return Note::create([
+            'title' => $data['title'],
+            'body' => $data['body'],
+            'user_id' => Auth::user()->id
+         ]);
     }
 
     public function updateNote($data)
     {
-        // TODO: Implement updateNote() method.
+        $note = Note::where('id', $data['id'])->first();
+        return $note->update([
+            'title' => $data['title'],
+            'body' => $data['body'],
+        ]);
     }
 
     public function deleteNoteUsingId($id)
     {
-        // TODO: Implement deleteNoteUsingId() method.
+        $note = Note::where('id', $id)->first();
+        $note->delete();
+        return $note;
     }
 }
