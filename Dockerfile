@@ -39,9 +39,6 @@ RUN docker-php-ext-install \
     gd \
     zip
 
-RUN git clone https://github.com/phpredis/phpredis.git /usr/src/php/ext/redis
-RUN docker-php-ext-install redis
-
 # Create a non-root user with the same UID/GID as the host user
 # ARG uid=1000
 # RUN useradd -G www-data,root -u $uid -d /home/production production
