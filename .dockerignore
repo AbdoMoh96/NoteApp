@@ -1,0 +1,10 @@
+vendor
+vendor/**
+public/storage
+storage/storage
+docker-compose.yml
+bootstrap/cache
+.idea
+composer.lock
+.phpstorm.meta.php
+_ide_helper.php
