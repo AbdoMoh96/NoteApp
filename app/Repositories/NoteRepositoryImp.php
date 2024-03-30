@@ -13,7 +13,7 @@ class NoteRepositoryImp implements NoteRepository
         $notes = Auth::user()->notes();
 
         if($request->has('keyword')){
-            $notes->where('title', 'like', "%{$request->keyword}%")->get();
+           return $notes->where('title', 'like', "%{$request->keyword}%")->get();
         }
 
         return $notes->get();
