@@ -8,14 +8,15 @@ use Illuminate\Support\Facades\Auth;
 class NoteRepositoryImp implements NoteRepository
 {
 
-    public function getAllUserNotes()
+    public function getAllUserNotes($request)
     {
-        return Auth::user()->notes()->get();
-    }
+        $notes = Auth::user()->notes();
 
-    public function filterNoteByTitle($title)
-    {
-        return Note::where('title', 'like', "%{$title}%")->get();
+        if($request->has('keyword')){
+            $notes->where('title', 'like', "%{$request->keyword}%")->get();
+        }
+
+        return $notes->get();
     }
 
     public function storeNote($data)
